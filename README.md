@@ -1,26 +1,39 @@
-https://github.com/takehaya/goxdp-template
+# Cross-connect Linux interfaces with XDP redirect
 
-https://github.com/hrntknr/nfNat
+The `xdp-xconnect` daemon is a long-running process that uses YAML file as its configuration API:
 
-https://github.com/takehaya/Vinbero
+```yaml
+links:
+    eth0: tap0
+    veth2: veth3
+```
 
-https://github.com/tcfw/vpc
+Given the above YAML file, local Linux interfaces can be cross-connected (eth0<->tap0 and veth2<->veth3) with the following command:
 
-https://github.com/florianl/tc-skeleton
+```
+xdp-xconnect -conf config.yaml
+```
 
-https://github.com/cloudflare/rakelimit
+This command will block and listen to any changes to the file and perform "warm" reconfigurations on the fly.
 
-https://github.com/b3a-dev/ebpf-geoip-demo
 
-https://github.com/lmb/ship-bpf-with-go
+## Installation
 
-https://qmonnet.github.io/whirl-offload/2020/04/12/llvm-ebpf-asm/
+Binary
 
-https://docs.cilium.io/en/stable/bpf/
+```
+go get github.com/networkop/xdp-xconnect
+```
 
-https://github.com/xdp-project/xdp-tutorial
+Docker:
 
-Test setup
+```
+docker pull networkop/xdp-xconnect
+docker run --privileged networkop/xdp-xconnect -conf input.yaml
+```
+
+
+Test setup (move into integration testing)
 
 ```
 sudo ip link del dev xconnect-1
@@ -68,3 +81,29 @@ cp testdata/bad.yaml testdata/input.yaml
 
 REQS:
 Linux > 4.14 (veth XDP support)
+
+
+Reading:
+
+
+https://github.com/takehaya/goxdp-template
+
+https://github.com/hrntknr/nfNat
+
+https://github.com/takehaya/Vinbero
+
+https://github.com/tcfw/vpc
+
+https://github.com/florianl/tc-skeleton
+
+https://github.com/cloudflare/rakelimit
+
+https://github.com/b3a-dev/ebpf-geoip-demo
+
+https://github.com/lmb/ship-bpf-with-go
+
+https://qmonnet.github.io/whirl-offload/2020/04/12/llvm-ebpf-asm/
+
+https://docs.cilium.io/en/stable/bpf/
+
+https://github.com/xdp-project/xdp-tutorial
