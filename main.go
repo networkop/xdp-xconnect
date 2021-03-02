@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	GitCommit string
+	GitCommit = "latest"
 )
 
 func main() {
