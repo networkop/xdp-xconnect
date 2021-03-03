@@ -4,7 +4,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/networkop/xdp-xconnect)](https://goreportcard.com/report/github.com/networkop/xdp-xconnect)
 [![GoDoc](https://godoc.org/istio.io/istio?status.svg)](https://pkg.go.dev/github.com/networkop/xdp-xconnect)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+![Build Status](https://github.com/networkop/xdp-xconnect/actions/workflows/ci.yml/badge.svg)
 
 ![](icon.png)
 
