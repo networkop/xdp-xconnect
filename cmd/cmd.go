@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	configFlag = flag.String("conf", "", "xdp-xconnect configuration file (YAML)")
+	configFlag = flag.String("conf", "", "[mandatory] xdp-xconnect configuration file (YAML)")
 	version    = flag.Bool("v", false, "Display version")
 )
 
@@ -47,6 +47,11 @@ func Run(commit string) error {
 
 	if *version {
 		printVersion(commit)
+	}
+
+	if *configFlag == "" {
+		flag.Usage()
+		return fmt.Errorf("-conf flag was not provided")
 	}
 
 	cfg, err := newFromFile(*configFlag)

@@ -20,7 +20,8 @@ type App struct {
 	linkMap map[string]*netlink.Link
 }
 
-// NewXconnectApp sets up the XDP xconnect between pairs of interfaces specified in the input
+// NewXconnectApp sets up the XDP xconnect application
+// Input expects a map between existing pairs of interface names that will be cross-connected.
 func NewXconnectApp(input map[string]string) (*App, error) {
 
 	c := &App{
@@ -153,7 +154,9 @@ func (c *App) updateBpfMap(added, changed, removed []string) error {
 	return errs
 }
 
-// Launch app, watch for changes and wait for termination
+// Launch app, watch for changes and perform "warm" reloads.
+// This function blocks forever and context can be used to gracefully stop it.
+// updateCh expects a map between interfaces, similar to input of NewXconnectApp.
 func (c *App) Launch(ctx context.Context, updateCh chan map[string]string) {
 
 	var links []string
