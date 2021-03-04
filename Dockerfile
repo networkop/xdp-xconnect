@@ -17,9 +17,8 @@ ARG TARGETARCH
 
 RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -ldflags "${LDFLAGS}" -o xdp-xconnect main.go
 
-FROM gcr.io/distroless/static:nonroot
+FROM alpine:latest
 WORKDIR /
 COPY --from=builder /src/xdp-xconnect .
-USER nonroot:nonroot
 
 ENTRYPOINT ["/xdp-xconnect"]

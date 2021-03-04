@@ -61,7 +61,7 @@ sudo xdp-xconnect -conf input.yaml
 Docker: 
 
 ```
-docker run --privileged networkop/xdp-xconnect -conf input.yaml
+docker run --net host -v$(pwd):/xc --privileged networkop/xdp-xconnect -conf /xc/input.yaml
 ```
 
 Go code:
@@ -75,11 +75,11 @@ func main() {
     input := map[string]string{"eth1":"tap1"}
 
     app, err := xdp.NewXconnectApp(input)
-	// handle error
+    // handle error
 
     updateCh := make(chan map[string]string, 1)
-
-	app.Launch(ctx, updateCh)
+    
+    app.Launch(ctx, updateCh)
 }
 ```
 
