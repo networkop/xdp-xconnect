@@ -14,9 +14,7 @@ struct bpf_map_def SEC("maps") xconnect_map = {
 SEC("xdp")
 int  xdp_xconnect(struct xdp_md *ctx)
 {
-	int ingIdx = ctx->ingress_ifindex;
-
-    return bpf_redirect_map(&xconnect_map, ingIdx, 0);
+    return bpf_redirect_map(&xconnect_map, ctx->ingress_ifindex, 0);
 }
 
 
