@@ -34,14 +34,14 @@ Each pair of interfaces will have an eBPF program attached to its XDP hook and w
 ## Prerequisites
 
 Linux Kernel version > 4.14 (introduced veth XDP support)
-Go 
+Go
 
 ## Installation
 
 Binary:
 
 ```
-go get github.com/networkop/xdp-xconnect
+go install github.com/networkop/xdp-xconnect@latest
 ```
 
 Docker:
@@ -58,7 +58,7 @@ Binary:
 sudo xdp-xconnect -conf input.yaml
 ```
 
-Docker: 
+Docker:
 
 ```
 docker run --net host -v$(pwd):/xc --privileged networkop/xdp-xconnect -conf /xc/input.yaml
@@ -78,7 +78,7 @@ func main() {
     // handle error
 
     updateCh := make(chan map[string]string, 1)
-    
+
     app.Launch(ctx, updateCh)
 }
 ```
@@ -173,7 +173,7 @@ cp testdata/bad.yaml testdata/input.yaml
 
 2021/03/03 20:15:46 Parsing config file: testdata/input.yaml
 2021/03/03 20:15:46 App configuration: {Links:map[xconnect-1:xconnect-asd]}
-2021/03/03 20:15:46 Error updating eBPF: 1 error occurred:                                                                                                                   
+2021/03/03 20:15:46 Error updating eBPF: 1 error occurred:
 	* Link not found
 
 64 bytes from 169.254.1.30: icmp_seq=317 ttl=64 time=0.065 ms
